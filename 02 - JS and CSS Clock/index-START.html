@@ -62,12 +62,32 @@
       background: black;
       position: absolute;
       top: 50%;
+      transform-origin: 100%;
+      transform: rotate(90deg);
+      transition: all cubic-bezier(0.39, 0.575, 0.565, 1);
     }
 
   </style>
 
   <script>
 
+    rotatehand = (hand,degrees)=>{
+      if(hand === 'hour') degrees = degrees*5
+      temp = document.querySelector(`.${hand}-hand`)
+      temp.style.transform = `rotate(${(degrees*6)+90}deg)`
+    }
+
+    setDate = ()=>{
+      const time = new Date();
+      seconds = time.getSeconds();
+      rotatehand('second',seconds);
+      minutes = time.getMinutes();
+      rotatehand('min',minutes)
+      hours = time.getHours()
+      rotatehand('hour',hours)
+    }
+
+    setInterval(setDate,1000)
 
   </script>
 </body>
